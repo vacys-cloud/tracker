@@ -91,9 +91,9 @@
         const totalValue = AMOUNT_INVESTED + interestEarned;
 
         // Display results formatted as currency
-        document.getElementById('initial-amount').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(AMOUNT_INVESTED);
-        document.getElementById('interest-earned').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(interestEarned);
-        document.getElementById('total-value').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalValue);
+        document.getElementById('initial-amount').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(AMOUNT_INVESTED);
+        document.getElementById('interest-earned').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(interestEarned);
+        document.getElementById('total-value').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(totalValue);
     }
 
     // Run the calculation immediately
