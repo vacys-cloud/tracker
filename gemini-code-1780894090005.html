@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Tracker</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary-color: #2ecc71;
+            --text-color: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 25px; color: #2c3e50; }
+        .stat-box { margin-bottom: 20px; }
+        .label { font-size: 0.9rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px; }
+        .value { font-size: 1.8rem; font-weight: bold; margin-top: 5px; }
+        .growth { color: var(--primary-color); font-size: 2.3rem; }
+        hr { border: 0; height: 1px; background: #eee; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Portfolio Tracker</h1>
+    
+    <script>
+        const AMOUNT_INVESTED = 1000;    // Enter the investment amount
+        const INTEREST_RATE = 5.5;       // Enter the annual interest rate in %
+        const INVESTMENT_DATE = "2026-01-01"; // Enter start date in YYYY-MM-DD format
+    </script>
+
+    <div class="stat-box">
+        <div class="label">Initial Investment</div>
+        <div class="value" id="initial-amount">$0.00</div>
+    </div>
+    
+    <hr>
+    
+    <div class="stat-box">
+        <div class="label">Interest Accumulated To Date</div>
+        <div class="value growth" id="interest-earned">$0.00</div>
+    </div>
+    
+    <hr>
+
+    <div class="stat-box">
+        <div class="label">Total Current Value</div>
+        <div class="value" id="total-value">$0.00</div>
+    </div>
+</div>
+
+<script>
+    function calculateInterest() {
+        const startDate = new Date(INVESTMENT_DATE);
+        const today = new Date();
+        
+        // Calculate time difference in days
+        const timeDiff = today.getTime() - startDate.getTime();
+        const daysPassed = Math.floor(timeDiff / (1000 * 3600 * 24));
+        
+        let interestEarned = 0;
+        
+        if (daysPassed > 0) {
+            // Simple interest calculated daily (capped at 365 days for a 1-year term)
+            const daysToCalculate = Math.min(daysPassed, 365);
+            interestEarned = AMOUNT_INVESTED * (INTEREST_RATE / 100) * (daysToCalculate / 365);
+        }
+
+        const totalValue = AMOUNT_INVESTED + interestEarned;
+
+        // Display results formatted as currency
+        document.getElementById('initial-amount').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(AMOUNT_INVESTED);
+        document.getElementById('interest-earned').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(interestEarned);
+        document.getElementById('total-value').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalValue);
+    }
+
+    // Run the calculation immediately
+    calculateInterest();
+</script>
+
+</body>
+</html>
